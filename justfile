@@ -4,6 +4,10 @@ build_create:
   cargo build --bin mfpcreate
 build_read:
   cargo build --bin mfpread 
+run_create:
+  cargo run --bin mfpcreate 
+run_read:
+  cargo run --bin mfpread -- ./testOut/test1.mfp
 install_all:
   cargo build --release --bin mfpcreate
   cargo build --release --bin mfpread 

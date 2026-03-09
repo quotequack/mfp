@@ -1,0 +1,6 @@
+[Desktop Entry]
+Name=mfpCreate
+Exec=mfpcreate
+Type=Application
+Terminal=true
+Categories=Utility;
