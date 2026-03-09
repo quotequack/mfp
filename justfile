@@ -19,3 +19,6 @@ remove_read:
   sudo rm /usr/bin/mfpread
 remove_create:
   sudo rm /usr/bin/mfpcreate
+remove_all:
+  sudo rm /usr/bin/mfpcreate
+  sudo rm /usr/bin/mfpread
