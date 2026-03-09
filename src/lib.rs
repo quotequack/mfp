@@ -23,7 +23,17 @@ pub fn decode(data: &[u8]) -> Result<DynamicImage, MfpError> {
     let header = Header::parse(&data[..HEADER_SIZE.min(data.len())])?;
     let payload = &data[HEADER_SIZE..];
 
+    if data[HEADER_SIZE..].len() != header.payload_len as usize {
+        return Err(
+            MfpError::InvalidPayloadLen{
+                expected: header.payload_len as usize,
+                actual: data[HEADER_SIZE..].len()
+            }
+        )
+    }
+
     match header.codec {
+        // Add your codec here
         CodecId::Png  => decoders::png::decode(payload),
         CodecId::Jpeg => decoders::jpeg::decode(payload),
         CodecId::Bmp  => decoders::bmp::decode(payload),
@@ -32,6 +42,7 @@ pub fn decode(data: &[u8]) -> Result<DynamicImage, MfpError> {
 
 pub fn encode(img: &DynamicImage, codec: CodecId) -> Result<Vec<u8>, MfpError> {
     let payload = match codec {
+        // And here
         CodecId::Png  => decoders::png::encode(img)?,
         CodecId::Jpeg => decoders::jpeg::encode(img)?,
         CodecId::Bmp  => decoders::bmp::encode(img)?,
