@@ -15,7 +15,7 @@ pub enum MfpError {
     UnexpectedEof,
     #[error("decode error: {0}")]
     DecodeError(#[from] image::ImageError),
-    #[error("payload len mismatch: expecter {expected}, got {actual}")]
+    #[error("payload len mismatch: expected {expected}, got {actual}")] 
     InvalidPayloadLen { expected: usize, actual: usize },
 }
 
