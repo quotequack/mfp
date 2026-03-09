@@ -11,14 +11,14 @@
             src = ./.;
             buildInputs = [];
             nativeBuildInputs = [];
-            cargoHash = "";
+            cargoHash = "sha256-ME5DyLKwyqejCm2y4ycEOWizZKVI6vyJRGYzVKEg8Bc=";
         };
         devShells."x86_64-linux".default = pkgs.mkShell {
-            buildInputs with pkgs = [
+            buildInputs = with pkgs; [
                 cargo
                 rustc 
             ];
-            nativeBuildInputs [ pkgs.pkg-config ];
+            nativeBuildInputs = [ pkgs.pkg-config ];
             env.RUST_SRC_PATH = "${pkgs.rust.packages.stable.rustPlatform.rustLibSrc}";
         };
     };
