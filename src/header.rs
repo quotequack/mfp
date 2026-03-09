@@ -6,6 +6,7 @@ pub const HEADER_SIZE: usize = 9;
 #[repr(u8)]
 #[derive(Debug, Clone, Copy, PartialEq)]
 
+// Add new codecID here:
 pub enum CodecId {
     Png  = 0x01,
     Jpeg = 0x02,
@@ -16,6 +17,7 @@ impl TryFrom<u8> for CodecId {
     type Error = MfpError;
     fn try_from(byte: u8) -> Result<Self, MfpError> {
         match byte {
+            // Append new codecID here:
             0x01 => Ok(CodecId::Png),
             0x02 => Ok(CodecId::Jpeg),
             0x03 => Ok(CodecId::Bmp),
@@ -30,6 +32,7 @@ pub struct Header {
 }
 
 impl Header {
+    // Parse file
     pub fn parse(data: &[u8]) -> Result<Self, MfpError> {
         if data.len() < HEADER_SIZE {
             return Err(MfpError::UnexpectedEof);
