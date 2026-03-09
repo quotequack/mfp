@@ -1,4 +1,4 @@
-use crate::MfpError;
+use crate::{MfpError, header};
 
 pub const MAGIC: [u8; 4] = [0x4D, 0x46, 0x50, 0x00]; 
 pub const HEADER_SIZE: usize = 9;
@@ -39,6 +39,14 @@ impl Header {
         }
         let codec = CodecId::try_from(data[4])?;
         let payload_len = u32::from_le_bytes(data[5..9].try_into().unwrap());
+        if data[HEADER_SIZE..].len() != payload_len as usize {
+            return Err(
+                MfpError::InvalidPayloadLen{
+                    expected: payload_len as usize,
+                    actual: data[HEADER_SIZE..].len()
+                }
+            )
+        }
         Ok(Header { codec, payload_len })
     }
 

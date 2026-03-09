@@ -2,7 +2,7 @@ pub mod decoders;
 pub mod header;
 
 use header::{CodecId, Header, HEADER_SIZE};
-use image::DynamicImage;
+use image::{DynamicImage, error};
 use thiserror::Error;
 
 #[derive(Debug, Error)]
@@ -15,6 +15,8 @@ pub enum MfpError {
     UnexpectedEof,
     #[error("decode error: {0}")]
     DecodeError(#[from] image::ImageError),
+    #[error("payload len mismatch: expecter {expected}, got {actual}")]
+    InvalidPayloadLen { expected: usize, actual: usize },
 }
 
 pub fn decode(data: &[u8]) -> Result<DynamicImage, MfpError> {
