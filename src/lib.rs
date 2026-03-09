@@ -2,7 +2,7 @@ pub mod decoders;
 pub mod header;
 
 use header::{CodecId, Header, HEADER_SIZE};
-use image::{DynamicImage, error};
+use image::DynamicImage;
 use thiserror::Error;
 
 #[derive(Debug, Error)]

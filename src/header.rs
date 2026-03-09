@@ -1,4 +1,4 @@
-use crate::{MfpError, header};
+use crate::MfpError;
 
 pub const MAGIC: [u8; 4] = [0x4D, 0x46, 0x50, 0x00]; 
 pub const HEADER_SIZE: usize = 9;
