@@ -11,7 +11,12 @@
             src = ./.;
             buildInputs = [];
             nativeBuildInputs = [];
-            cargoHash = "sha256-ME5DyLKwyqejCm2y4ycEOWizZKVI6vyJRGYzVKEg8Bc=";
+            cargoHash = "sha256-eWZTrM+eeqJx64HNkPLKAYMmzUSrCg/mU8ypwqbCZNw=";
+            postInstall = ''
+              mkdir -p $out/share/applications/
+              install -Dm644 mfpCreate.desktop $out/share/applications/mfpCreate.desktop
+              install -Dm644 mfpRead.desktop $out/share/applications/mfpRead.desktop
+            '';
         };
         devShells."x86_64-linux".default = pkgs.mkShell {
             buildInputs = with pkgs; [
