@@ -12,6 +12,7 @@
             buildInputs = [];
             nativeBuildInputs = [];
             cargoHash = "sha256-eWZTrM+eeqJx64HNkPLKAYMmzUSrCg/mU8ypwqbCZNw=";
+            RUST_MIN_STACK="33554432";
             postInstall = ''
               mkdir -p $out/share/applications/
               install -Dm644 mfpCreate.desktop $out/share/applications/mfpCreate.desktop
