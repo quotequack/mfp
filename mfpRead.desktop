@@ -2,6 +2,6 @@
 Name=mfpRead
 Exec=mfpread
 Type=Application
-Terminal=true
+Terminal=false
 Categories=Utility;
 MimeType=image/x-mfp
