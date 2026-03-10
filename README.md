@@ -1,4 +1,3 @@
-
 # MultiFormatPicture
 
 Image codecs should not wait for standardasation
@@ -39,3 +38,5 @@ Contributing is easy!
 
 See `contributing.md` for ways to get started.
 
+# Usage
+*in progress*
