@@ -15,8 +15,11 @@
             RUST_MIN_STACK="33554432";
             postInstall = ''
               mkdir -p $out/share/applications/
+              mkdir -p $out/share/mime/packages/
               install -Dm644 mfpCreate.desktop $out/share/applications/mfpCreate.desktop
               install -Dm644 mfpRead.desktop $out/share/applications/mfpRead.desktop
+              install -Dm644 image-mfp.xml $out/share/mime/packages/image-mfp.xml
+              update-mime-database ~/.local/share/mime
             '';
         };
         devShells."x86_64-linux".default = pkgs.mkShell {
