@@ -44,6 +44,18 @@ After adding the decode encode logic:
         "example"  => CodecId::Example,
 ```
 
+#### mfpextract.rs
+
+1. Match at line 7:
+```rust
+        ".example" => 0x00
+```
+
+2. Match at line 15:
+```rust
+        ".example" => decoders::example::encode(&decoded).expect("failed to encode"),
+```
+
 ### Other contributions
 
 Are welcome! Comments are on the way for the rust files!

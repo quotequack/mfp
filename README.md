@@ -41,6 +41,9 @@ To contain an image of supported codec in an mfp file do:
 ```bash
 mfpcreate INPUT_PATH CODEC OUTPUT_PATH
 ```
+Input path: path of input image
+Codec: codec to use (can be different than currect codec)
+Output path: path for output image
 
 ### Opening a .mfp file
 
@@ -49,9 +52,17 @@ that means in your file browser of choice you should be able to double click a .
 
 For a cli option use:
 ```bash
-msfread INPUT_PATH
+mfpread INPUT_PATH
 ``` 
 directly
+
+### Extracting from a .mfp file
+
+To extract the image inside a .mfp file do:
+```bash
+mfpextract INPUT_PATH
+```
+Image should be extracted into current directory as extract.XXX (XXX being the format it uses)
 
 ## Codecs
 
