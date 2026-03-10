@@ -1,5 +1,5 @@
 use crate::MfpError;
-use image::{DynamicImage, GenericImageView, ImageBuffer, Rgb, RgbaImage};
+use image::{DynamicImage, GenericImageView, ImageBuffer, RgbaImage};
 use qoi::{encode_to_vec,decode_to_vec};
 
 pub fn decode(data: &[u8]) -> Result<DynamicImage, MfpError> {
