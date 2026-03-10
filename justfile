@@ -11,34 +11,46 @@ run_read:
 install_all:
   cargo build --release --bin mfpcreate
   cargo build --release --bin mfpread 
+  cargo build --release --bin mfpextract 
   sudo cp target/release/mfpcreate /usr/bin 
   sudo cp target/release/mfpread /usr/bin 
-  cp mfpRead.desktop ~/.local/share/applications/mfpRead.desktop
-  cp mfpCreate.desktop ~/.local/share/applications/mfpCreate.desktop
+  sudo cp target/release/mfpextract /usr/bin 
+  cp mfpRead.desktop $HOME/.local/share/applications/mfpRead.desktop
+  cp mfpCreate.desktop $HOME/.local/share/applications/mfpCreate.desktop
   cp image-mfp.xml $HOME/.local/share/mime/packages/image-mfp.xml
-  update-mime-database ~/.local/share/mime
+  cp mfpExtract.desktop $HOME/.local/share/applications/mfpExtract.desktop
+  update-mime-database $HOME/.local/share/mime
 install_read:
   cargo build --release --bin mfpread 
   sudo cp target/release/mfpread /usr/bin 
-  cp mfpRead.desktop ~/.local/share/applications/mfpRead.desktop
+  cp mfpRead.desktop $HOME/.local/share/applications/mfpRead.desktop
+install_extract:
+  cargo build --release --bin mfpextract 
+  sudo cp target/release/mfpextract /usr/bin 
+  cp mfpExtract.desktop $HOME/.local/share/applications/mfpExtract.desktop
 install_create:
   cargo build --release --bin mfpcreate
   sudo cp target/release/mfpcreate /usr/bin 
-  cp mfpCreate.desktop ~/.local/share/applications/mfpCreate.desktop
+  cp mfpCreate.desktop $HOME/.local/share/applications/mfpCreate.desktop
 install_file_type:
   cp image-mfp.xml $HOME/.local/share/mime/packages/image-mfp.xml
-  update-mime-database ~/.local/share/mime
+  update-mime-database $HOME/.local/share/mime
 remove_read:
   sudo rm /usr/bin/mfpread
-  rm ~/.local/share/applications/mfpRead.desktop
+  rm $HOME/.local/share/applications/mfpRead.desktop
 remove_create:
   sudo rm /usr/bin/mfpcreate
-  rm ~/.local/share/applications/mfpCreate.desktop
+  rm $HOME/.local/share/applications/mfpCreate.desktop
+remove_extract:
+  sudo rm /usr/bin/mfpextract
+  rm $HOME/.local/share/applications/mfpExtract.desktop
 remove_all:
   sudo rm /usr/bin/mfpcreate
   sudo rm /usr/bin/mfpread
+  sudo rm /usr/bin/mfpextract
   rm $HOME/.local/mime/packages/image-mfp.xml
-  update-mime-database ~/.local/share/mime
+  rm $HOME/.local/share/applications/mfpExtract.desktop
+  update-mime-database $HOME/.local/share/mime
 remove_file_type:
   rm $HOME/.local/mime/packages/image-mfp.xml
-  update-mime-database ~/.local/share/mime
+  update-mime-database $HOME/.local/share/mime

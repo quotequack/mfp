@@ -1,0 +1,6 @@
+[Desktop Entry]
+Name=mfpExtract
+Exec=mfprxtract
+Type=Application
+Terminal=false
+Categories=Utility;

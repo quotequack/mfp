@@ -18,6 +18,7 @@
               mkdir -p $out/share/mime/packages/
               install -Dm644 mfpCreate.desktop $out/share/applications/mfpCreate.desktop
               install -Dm644 mfpRead.desktop $out/share/applications/mfpRead.desktop
+              install -Dm644 mfpExtract.desktop $out/share/application/mfpExtract.desktop
               install -Dm644 image-mfp.xml $out/share/mime/packages/image-mfp.xml
             '';
         };
