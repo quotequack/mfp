@@ -4,7 +4,7 @@ use std::process::Command;
 use tempfile::tempdir;
 
 fn main() {
-    let path = env::args().nth(1).expect("usage: mfpopen <file.mfp>");
+    let path = env::args().nth(1).expect("usage: mfpread <file.mfp>");
     let mfp_bytes = fs::read(&path).expect("could not read file");
     let image = mfp::decode(&mfp_bytes).expect("could not decode mfp");
 
