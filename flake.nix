@@ -11,7 +11,7 @@
             src = ./.;
             buildInputs = [];
             nativeBuildInputs = [];
-            cargoHash = "sha256-eWZTrM+eeqJx64HNkPLKAYMmzUSrCg/mU8ypwqbCZNw=";
+            cargoHash = "sha256-4BjFaNPUg299Cqo9eVyHO/Hm95TCDUib2KjMXiK/bEQ=";
             RUST_MIN_STACK="33554432";
             postInstall = ''
               mkdir -p $out/share/applications/
