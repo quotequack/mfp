@@ -12,6 +12,7 @@ fn main() {
         "png"  => CodecId::Png,
         "jpeg" | "jpg" => CodecId::Jpeg,
         "bmp"  => CodecId::Bmp,
+        "qoi" => CodecId::Qoi,
         other  => panic!("unknown codec: {}", other),
     };
 

@@ -59,6 +59,7 @@ directly
 * jpeg
 * png
 * bmp
+* qoi
 
 
 ## Contributing

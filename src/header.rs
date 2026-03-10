@@ -11,6 +11,7 @@ pub enum CodecId {
     Png  = 0x01,
     Jpeg = 0x02,
     Bmp  = 0x03,
+    Qoi = 0x04,
 }
 
 impl TryFrom<u8> for CodecId {
@@ -21,6 +22,7 @@ impl TryFrom<u8> for CodecId {
             0x01 => Ok(CodecId::Png),
             0x02 => Ok(CodecId::Jpeg),
             0x03 => Ok(CodecId::Bmp),
+            0x04 => Ok(CodecId::Qoi),
             other => Err(MfpError::UnknownCodec(other)),
         }
     }

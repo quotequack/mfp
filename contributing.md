@@ -17,7 +17,7 @@ After adding the decode encode logic:
     Example = 0x00 // 00 being the next hexadecimal number
 ```
 
-2. Match at line 19, append you new codec like:
+2. Match at line 20, append you new codec like:
 
 ```rust
             0x00 => Ok(CodecId::Example),
@@ -31,10 +31,17 @@ After adding the decode encode logic:
         CodecId::Example => decoders::example::decode(payload),
 ```
 
-2. Match at line 44: 
+2. Match at line 45: 
 
 ```rust
         CodecId::Example => decoders::example::encode(payload),
+```
+
+#### mfpcreate.rs
+
+1. Match at line 11:
+```rust
+        "example"  => CodecId::Example,
 ```
 
 ### Other contributions

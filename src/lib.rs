@@ -37,6 +37,7 @@ pub fn decode(data: &[u8]) -> Result<DynamicImage, MfpError> {
         CodecId::Png  => decoders::png::decode(payload),
         CodecId::Jpeg => decoders::jpeg::decode(payload),
         CodecId::Bmp  => decoders::bmp::decode(payload),
+        CodecId::Qoi => decoders::qoi::decode(payload),
     }
 }
 
@@ -46,6 +47,7 @@ pub fn encode(img: &DynamicImage, codec: CodecId) -> Result<Vec<u8>, MfpError> {
         CodecId::Png  => decoders::png::encode(img)?,
         CodecId::Jpeg => decoders::jpeg::encode(img)?,
         CodecId::Bmp  => decoders::bmp::encode(img)?,
+        CodecId::Qoi => decoders::qoi::encode(img)?,
     };
 
     let header = Header {
