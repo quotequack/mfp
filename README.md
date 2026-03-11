@@ -60,9 +60,21 @@ directly
 
 To extract the image inside a .mfp file do:
 ```bash
-mfpextract INPUT_PATH
+mfpextract INPUT_PATH OUTPUT_PATH
 ```
-Image should be extracted into current directory as extract.XXX (XXX being the format it uses)
+Input path: path of input image
+Output path: path for output image
+
+### Converting between supported codecs (without the use of a .mfp file)
+
+To convert from codec A to B do:
+```bash
+mfpconvert INPUT_PATH CODEC OUTPUT_PATH
+```
+Input path: path of input image
+Codec: codec to convert to
+Output path: path for output image
+
 
 ## Codecs
 
@@ -83,4 +95,3 @@ See `contributing.md` for ways to get started.
 ## Roadmap
 
 * more formats
-* mfp converter

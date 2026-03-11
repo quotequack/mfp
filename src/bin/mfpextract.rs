@@ -1,26 +1,28 @@
-use mfp::decoders;
-use std::{fs,env};
+use mfp::{decoders, header::CodecId};
+use std::{env, fs};
 
 fn main() {
-    let path = env::args().nth(1).expect("usage: mfpextract <file.mfp>");
-    let mfp_bytes = fs::read(&path).expect("could not read file");
+    let mut args = env::args().skip(1);
+    let input  = args.next().expect("usage: mfpextract <input.mfp> <output>");
+    let output = args.next().expect("output path required");
+
+
+    let mfp_bytes = fs::read(&input).expect("could not read file");
     let codec = match mfp_bytes[4] {
-        0x01 => ".png",
-        0x02 => ".jpg",
-        0x03 => ".bmp",
-        0x04 => ".qoi",
+        0x01 => CodecId::Png,
+        0x02 => CodecId::Jpeg,
+        0x03 => CodecId::Bmp,
+        0x04 => CodecId::Qoi,
         other => Err(mfp::MfpError::UnknownCodec(other)).expect("Failed to fail"),
     };
     let decoded = mfp::decode(&mfp_bytes).expect("could not decode mfp");
     let encoded = match codec {
-        ".png"  => decoders::png::encode(&decoded).expect("failed to encode"),
-        ".jpg" => decoders::jpeg::encode(&decoded).expect("failed to encode"),
-        ".bmp"  => decoders::bmp::encode(&decoded).expect("failed to encode"),
-        ".qoi" => decoders::qoi::encode(&decoded).expect("failed to encode"),
-        _ => Err(mfp::MfpError::UnknownCodec(mfp_bytes[4])).expect("Failed to fail")
+        CodecId::Png  => decoders::png::encode(&decoded).expect("failed to encode"),
+        CodecId::Jpeg => decoders::jpeg::encode(&decoded).expect("failed to encode"),
+        CodecId::Bmp  => decoders::bmp::encode(&decoded).expect("failed to encode"),
+        CodecId::Qoi => decoders::qoi::encode(&decoded).expect("failed to encode"),
     };
     
-    let path = format!("./extract{}",codec);
-    println!("{}",&path);
-    let _ = fs::write(path, encoded);
+    println!("{}",&output);
+    let _ = fs::write(output, encoded).expect("failed to save");
 }

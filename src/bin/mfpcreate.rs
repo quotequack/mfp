@@ -5,7 +5,7 @@ use mfp::header::CodecId;
 fn main() {
     let mut args = env::args().skip(1);
     let input  = args.next().expect("usage: mfpcreate <input> <codec> <output.mfp>");
-    let codec  = args.next().expect("codec required: png, jpeg, bmp");
+    let codec  = args.next().expect("codec required");
     let output = args.next().expect("output path required");
 
     let codec = match codec.to_lowercase().as_str() {

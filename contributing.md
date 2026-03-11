@@ -48,12 +48,24 @@ After adding the decode encode logic:
 
 1. Match at line 7:
 ```rust
-        ".example" => 0x00
+        0x00 => CodecId::Example,
 ```
 
-2. Match at line 15:
+2. Match at line 18:
 ```rust
-        ".example" => decoders::example::encode(&decoded).expect("failed to encode"),
+        CodecId::Example => decoders::example::encode(&decoded).expect("failed to encode"),
+```
+
+### mfpconvert.rs
+
+1. Match at line 14:
+```rust
+        "example" => CodecId::Example,
+```
+
+2. Match at line 22:
+```rust
+        CodecId::Example => decoders::example::encode(&img).expect("failed to encode"),
 ```
 
 ### Other contributions
