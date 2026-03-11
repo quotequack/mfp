@@ -1,6 +1,6 @@
 use std::env;
 use std::fs;
-use mfp::header::CodecId;
+use mfp::resolvers::resolve_name;
 
 fn main() {
     let mut args = env::args().skip(1);
@@ -8,13 +8,7 @@ fn main() {
     let codec  = args.next().expect("codec required");
     let output = args.next().expect("output path required");
 
-    let codec = match codec.to_lowercase().as_str() {
-        "png"  => CodecId::Png,
-        "jpeg" | "jpg" => CodecId::Jpeg,
-        "bmp"  => CodecId::Bmp,
-        "qoi" => CodecId::Qoi,
-        other  => panic!("unknown codec: {}", other),
-    };
+    let codec = resolve_name(codec);
 
     let img = image::open(&input).expect("could not open image");
     let mfp_bytes = mfp::encode(&img, codec).expect("could not encode mfp");

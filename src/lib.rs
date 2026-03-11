@@ -1,9 +1,11 @@
 pub mod decoders;
 pub mod header;
+pub mod resolvers;
 
 use header::{CodecId, Header, HEADER_SIZE};
 use image::DynamicImage;
 use thiserror::Error;
+use resolvers::*;
 
 #[derive(Debug, Error)]
 pub enum MfpError {
@@ -32,24 +34,11 @@ pub fn decode(data: &[u8]) -> Result<DynamicImage, MfpError> {
         )
     }
 
-    match header.codec {
-        // Add your codec here
-        CodecId::Png  => decoders::png::decode(payload),
-        CodecId::Jpeg => decoders::jpeg::decode(payload),
-        CodecId::Bmp  => decoders::bmp::decode(payload),
-        CodecId::Qoi => decoders::qoi::decode(payload),
-    }
+    resolve_decode(header.codec, payload)
 }
 
 pub fn encode(img: &DynamicImage, codec: CodecId) -> Result<Vec<u8>, MfpError> {
-    let payload = match codec {
-        // And here
-        CodecId::Png  => decoders::png::encode(img)?,
-        CodecId::Jpeg => decoders::jpeg::encode(img)?,
-        CodecId::Bmp  => decoders::bmp::encode(img)?,
-        CodecId::Qoi => decoders::qoi::encode(img)?,
-    };
-
+    let payload = resolve_encode(codec, img)?;
     let header = Header {
         codec,
         payload_len: payload.len() as u32,

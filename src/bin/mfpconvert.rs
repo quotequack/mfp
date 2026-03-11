@@ -1,7 +1,7 @@
 use std::env;
 use std::fs;
-use mfp::header::CodecId;
-use mfp::decoders;
+use mfp::resolvers::resolve_encode;
+use mfp::resolvers::resolve_name;
 
 fn main() {
     let mut args = env::args().skip(1);
@@ -11,20 +11,9 @@ fn main() {
 
     let img = image::open(&input).expect("could not open image");
 
-    let codec: CodecId = match codec.to_lowercase().as_str() {
-        "png"  => CodecId::Png,
-        "jpeg" | "jpg" => CodecId::Jpeg,
-        "bmp" | "bitmap"  => CodecId::Bmp,
-        "qoi" => CodecId::Qoi,
-        other  => panic!("unknown codec: {}", other),
-    };
+    let codec = resolve_name(codec);
 
-    let encoded = match codec {
-        CodecId::Png  => decoders::png::encode(&img).expect("failed to encode"),
-        CodecId::Jpeg => decoders::jpeg::encode(&img).expect("failed to encode"),
-        CodecId::Bmp  => decoders::bmp::encode(&img).expect("failed to encode"),
-        CodecId::Qoi => decoders::qoi::encode(&img).expect("failed to encode"),
-    };
+    let encoded = resolve_encode(codec, &img).expect("failed to encode");
 
     fs::write(&output, encoded).expect("could not write output");
 
