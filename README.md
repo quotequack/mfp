@@ -78,3 +78,9 @@ Image should be extracted into current directory as extract.XXX (XXX being the f
 Contributing is easy!
 
 See `contributing.md` for ways to get started.
+
+
+## Roadmap
+
+* more formats
+* mfp converter
